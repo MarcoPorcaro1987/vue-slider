@@ -6,7 +6,8 @@ const app = new Vue({
             "https://www.mylondra.it/wp-content/uploads/2018/04/AdobeStock_61816288.jpeg",
             "https://www.mylondra.it/wp-content/uploads/2012/11/AdobeStock_61740708-1024x682.jpeg"
         ],
-        imgIndex: 0
+        imgIndex: 0,
+        autoplay: null
     },
     methods: {
         nextImg: function (){
@@ -23,9 +24,15 @@ const app = new Vue({
         },
         changeImg: function (index){
                 this.imgIndex = index;
-            }
+        },
+        stopAutoplay: function(){
+            clearInterval(this.autoplay);
+        },
+        startAutoplay: function(){
+            this.autoplay = setInterval( () =>this.nextImg(), 2500);
+        } 
     },
     mounted : function() {
-        setInterval( () =>this.nextImg(), 3500);
+        this.startAutoplay();
     }
   });
